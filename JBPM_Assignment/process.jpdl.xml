@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns=""  name="process">
+
+
+	<start-state name="start-state1" >
+		<transition to="addmission_verification"></transition>
+	</start-state>
+
+
+	<task-node name="addmission_verification" >
+		<task name="Verify pupil Details" notify="true">
+			<assignment class="test.handler.ClerkAssignment">
+			</assignment>
+		</task>
+		<transition to="principal_verfiaction">
+		</transition>
+		<transition to="decision2" name="to decision2"></transition>
+	</task-node>
+
+	<task-node name="principal_verfiaction">
+		<task name="principal_verification">
+			<assignment class="test.handler.PrincipalAssignment">
+			</assignment>
+		</task>
+		<transition to="end-state1"></transition>
+		<transition to="decision1" name="to decision1"></transition>
+	</task-node>
+
+	<decision name="decision1">
+		<transition to="addmission_verification"></transition>
+		<transition to="end-state1" name="to end-state1"></transition>
+	</decision>
+
+	<decision name="decision2">
+		<transition to="principal_verfiaction"></transition>
+	</decision>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="Assign_CSC_Engineer">
+
+
+	<start-state name="start">
+		<transition to="assign CSC Engineer"></transition>
+	</start-state>
+
+
+	<task-node name="assign CSC Engineer">
+	<task name="Assign CSC Engg Task" notify="true">
+			<assignment class="com.icat.jbpm.workflow.caseregistration.AssignCoOrdinatorHandler"></assignment>
+		</task>
+		<transition to="end"></transition>
+	</task-node>
+
+
+	<end-state name="end"></end-state>
+
+
+</process-definition>
