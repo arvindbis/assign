@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<process-definition  xmlns=""  name="process">
+<process-definition  xmlns=""  name="to_principal">
 
 
 	<start-state name="start-state1" >
-		<transition to="addmission_verification"></transition>
+		<transition to="fill_addmission_form"></transition>
 	</start-state>
 
 
@@ -13,9 +13,7 @@
 			<assignment class="test.handler.ClerkAssignment">
 			</assignment>
 		</task>
-		<transition to="principal_verfiaction">
-		</transition>
-		<transition to="decision2" name="to decision2"></transition>
+		<transition to="clerkdecision" name="to clerkdecision"></transition>
 	</task-node>
 
 	<task-node name="principal_verfiaction">
@@ -23,18 +21,26 @@
 			<assignment class="test.handler.PrincipalAssignment">
 			</assignment>
 		</task>
-		<transition to="end-state1"></transition>
-		<transition to="decision1" name="to decision1"></transition>
+		<transition to="principalDecision" name="to principalDecision"></transition>
 	</task-node>
 
-	<decision name="decision1">
+	<decision name="principalDecision">
+		<handler class="test.decision.PrincipalDecision"></handler>
+		<event type="transition"></event>
 		<transition to="addmission_verification"></transition>
 		<transition to="end-state1" name="to end-state1"></transition>
 	</decision>
 
-	<decision name="decision2">
-		<transition to="principal_verfiaction"></transition>
+	<decision name="clerkdecision">
+		<handler config-type="constructor" class="test.decision.ClerkDecision"></handler>
+		<event type=""></event>
+		<transition to="principal_verfiaction" name="to_principal"></transition>
+		<transition to="fill_addmission_form" name="to fill_addmission_form"></transition>
 	</decision>
+
+	<task-node name="fill_addmission_form">
+		<transition to="addmission_verification" name="to addmission_verification"></transition>
+	</task-node>
 
 
 	<end-state name="end-state1"></end-state>
